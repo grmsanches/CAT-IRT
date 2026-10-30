@@ -1,10 +1,12 @@
-# Computerized Adaptive Tests in IRT
-A comparison between methods in CAT used for IRT: fisher information against expected posterior entropy.
+<img src="./logo_enem.jpeg" alt="Banner" width="100%" height=300>
 
-The idea is that we can use all the information of the posterior distribution of the estimated parameter (ability parameter) to propose the nest item for the participant, instead of using only the local information that the method of Fisher's information gathers.
+# Testes Adaptativos Computadorizados na TRI
+Uma comparação entre métodos utilizados em **Testes Adaptativos Computadorizados** (CAT, na sigla em inglês) no contexto da Teoria de Resposta ao Item (TRI): **informação de Fisher versus entropia a posteriori esperada**.
 
----
+A proposta é utilizar todas as informações contidas na distribuição a posteriori do parâmetro estimado (parâmetro de proficiência) para selecionar o próximo item a ser apresentado ao participante, em vez de depender apenas da informação local captada pelo método baseado na informação de Fisher.
 
-# Source
+Espera-se que o método proposto seja capaz de **reduzir o número de perguntas necessárias** para se obter uma estimativa razoáveç para o traço latente do candidato.
 
-The data was obtained through this [link](https://download.inep.gov.br/microdados/microdados_enem_2023.zip). 
+# Fonte
+
+Os dados foram obtidos por meio deste [link](https://download.inep.gov.br/microdados/microdados_enem_2023.zip).
