@@ -10,3 +10,14 @@ Espera-se que o método proposto seja capaz de **reduzir o número de perguntas 
 # Fonte
 
 Os dados foram obtidos por meio deste [link](https://download.inep.gov.br/microdados/microdados_enem_2023.zip).
+
+# Metodologia
+
+Para este projeto, consideramos apenas as provas Azul, Amarela, Rosa e Cinza (cujos respectivos códigos são: 1211, 1212, 1213, 1214). Removemos da análise os candidatos com valores desconhecidos para alguma das seguintes colunas (as colunas de interesse para o projeto):
+
+- *NU_NOTA_MT*
+- *TX_RESPOSTAS_MT*
+- *TX_GABARITO_MT*
+- *CO_PROVA_MT*
+
+Nossa base de dados foi, então, de aproximadamente 4 milhões de observações para 2.7 milhões (uma redução em torno de 32.5%).
