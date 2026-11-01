@@ -1,4 +1,4 @@
-<img src="./banner.jpg" alt="Banner" width="100%" height="300" style="display: block; object-fit: cover;">
+<img src="./assets/banner.jpg" alt="Banner" width="100%" height="300" style="display: block; object-fit: cover;">
 
 # Testes Adaptativos Computadorizados na TRI
 Uma comparação entre métodos utilizados em **Testes Adaptativos Computadorizados** (CAT, na sigla em inglês) no contexto da Teoria de Resposta ao Item (TRI): **informação de Fisher versus entropia a posteriori esperada**.
