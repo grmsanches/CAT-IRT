@@ -1,4 +1,4 @@
-library(data.table)
+pacman::p_load(data.table, arrow, dplyr)
 
 # 1. Leitura (Latin-1, como definido pelo INEP)
 itens_2023 <- fread(
@@ -7,34 +7,17 @@ itens_2023 <- fread(
   encoding  = "Latin-1"
 )
 
-# 2. Fatores
-itens_2023[, SG_AREA := factor(SG_AREA,
-                               levels = c("CH", "CN", "LC", "MT"),
-                               labels = c("Ciências Humanas", "Ciências da Natureza",
-                                          "Linguagens e Códigos", "Matemática"))]
+mat_2023 <- dplyr::filter(itens_2023, SG_AREA == "MT")
 
-itens_2023[, TP_LINGUA := factor(TP_LINGUA,
-                                 levels = c(0, 1), labels = c("Inglês", "Espanhol"))]
+codigos_catalogados = c("1211", "1212", "1213", "1214")
 
-itens_2023[, IN_ITEM_ADAPTADO := factor(IN_ITEM_ADAPTADO,
-                                        levels = c(1, 0), labels = c("Sim", "Não"))]
+mat_2023 <- dplyr::filter(mat_2023, CO_PROVA %in% codigos_catalogados)
 
-itens_2023[, IN_ITEM_ABAN := factor(IN_ITEM_ABAN,
-                                    levels = c(1, 0), labels = c("Sim", "Não"))]
+mat_2023 <- dplyr::select(mat_2023, -SG_AREA, -TP_LINGUA,
+                          -TX_COR, -TX_MOTIVO_ABAN, -CO_ITEM, -CO_HABILIDADE) 
+mat_2023 <- mat_2023 |> dplyr::arrange(CO_PROVA, CO_POSICAO)
 
-# 3. Diagnóstico: o que existe de fato em Matemática?
-itens_2023[SG_AREA == "Matemática",
-           .(provas = uniqueN(CO_PROVA), itens = uniqueN(CO_ITEM), linhas = .N),
-           by = .(TX_COR, IN_ITEM_ADAPTADO)]
-
-# 4. Seleção completa (σ) + eliminação de duplicatas (π)
-mat_2023 <- itens_2023[
-  SG_AREA == "Matemática" &
-    TX_COR == "VERDE" &
-    IN_ITEM_ADAPTADO == "Não"
-]
-setorder(mat_2023, CO_POSICAO)
-mat_2023 <- unique(mat_2023, by = "CO_ITEM")
+write_parquet(mat_2023, "mat_2023.parquet")
 
 ### Agora preciso formatar a tabela e certificar que a ordem das questões é a mesma
 ### que está suposta no outro arquivo .parquet
