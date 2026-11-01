@@ -25,7 +25,11 @@ ENEM_2023 <- data.table::fread(
 
 # Remoção de registros com NA nas colunas
 
+ENEM_2023 <- dplyr::filter(ENEM_2023, CO_PROVA_MT %in% c(1211,1212,1213,1214))
+
+
 ENEM_2023 <- na.omit(ENEM_2023)
+
 
 # 1. Converte o vetor de respostas e de gabaritos em matrizes (N x 45)
 resp_mat <- do.call(rbind, strsplit(ENEM_2023$TX_RESPOSTAS_MT, ""))
