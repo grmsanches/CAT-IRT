@@ -1,0 +1,11 @@
+"bank","metric","contrast","mean_difference","median_difference","lower_95_MC","upper_95_MC","replications"
+"synthetic_demo","rmse","entropy - fisher",-0.0155953638796911,-0.017655944640352,-0.144081240542696,0.110201580512744,50
+"synthetic_demo","mae","entropy - fisher",-0.00727211767010125,-0.0093068039973366,-0.100895333980413,0.0926435127265058,50
+"synthetic_demo","mean_items","entropy - fisher",0.3164,0.33,0.10225,0.49325,50
+"synthetic_demo","mean_posterior_sd","entropy - fisher",-0.00767768080146568,-0.00752325534555665,-0.0110110992270482,-0.00358971922621748,50
+"synthetic_demo","target_attainment","entropy - fisher",0,0,0,0,50
+"enem_verified","rmse","entropy - fisher",0.000522461297818946,0.00196483228551397,-0.114344105303997,0.103594897454376,50
+"enem_verified","mae","entropy - fisher",0.00310142063972174,0.00377197725937034,-0.0835297886855485,0.0912521670387737,50
+"enem_verified","mean_items","entropy - fisher",-0.2938,-0.375,-5.31775,3.174,50
+"enem_verified","mean_posterior_sd","entropy - fisher",0.00442112374265781,0.00435437449541026,-0.00884480196113583,0.0140246756626911,50
+"enem_verified","target_attainment","entropy - fisher",0.00840000000000001,0.005,-0.0877500000000001,0.1465,50

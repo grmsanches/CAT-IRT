@@ -1,0 +1,11 @@
+"AREA","area_name","language","method","eligible_pool_items","replications","rmse","mae","bias","mean_items","mean_posterior_sd","target_attainment","full_length_rate","structure_valid"
+"LC","Linguagens, Códigos e suas Tecnologias","english","entropy",45,10,0.306405362916057,0.213758675331375,-0.0113399868077045,45,0.256253655773245,0.8,1,TRUE
+"CH","Ciências Humanas e suas Tecnologias",NA,"entropy",45,10,0.360314566648063,0.284299151143707,0.00933773455081341,18.2,0.375486180119434,0.692,0.308,NA
+"CN","Ciências da Natureza e suas Tecnologias",NA,"entropy",45,10,0.481863677319615,0.36038178661264,0.0459907324772477,27.396,0.419852702862789,0.452,0.548,NA
+"MT","Matemática e suas Tecnologias",NA,"entropy",43,10,0.515524007004319,0.391735368852528,-0.0164867219839194,32.548,0.512497307597291,0.304,0.696,NA
+"LC","Linguagens, Códigos e suas Tecnologias","spanish","entropy",45,10,0.264087615090113,0.204153463812496,-0.0120680055363905,45,0.258179151827827,0.82,1,TRUE
+"LC","Linguagens, Códigos e suas Tecnologias","english","fisher",45,10,0.278428611615275,0.19575080843437,-0.0066358549382727,45,0.253914938115903,0.808,1,TRUE
+"CH","Ciências Humanas e suas Tecnologias",NA,"fisher",45,10,0.362357652058183,0.268377608470432,-0.0168454860670854,19.372,0.380240038077999,0.664,0.336,NA
+"CN","Ciências da Natureza e suas Tecnologias",NA,"fisher",45,10,0.512227322895478,0.370797393227384,0.0651187252001115,28.536,0.423900090216571,0.428,0.572,NA
+"MT","Matemática e suas Tecnologias",NA,"fisher",43,10,0.529448144593668,0.391111089734892,0.0453253953482591,32.772,0.503552539962802,0.3,0.7,NA
+"LC","Linguagens, Códigos e suas Tecnologias","spanish","fisher",45,10,0.242239586901013,0.183171935378594,-0.00856906152910175,45,0.256601385452874,0.812,1,TRUE

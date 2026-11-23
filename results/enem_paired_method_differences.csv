@@ -1,0 +1,36 @@
+"AREA","area_name","language","metric","contrast","mean_difference","median_difference","lower_95_MC","upper_95_MC","replications"
+"LC","Linguagens, Códigos e suas Tecnologias","english","rmse","EPE - Fisher",0.0279767513007822,0.0123035255546761,-0.0204500048650704,0.130123380722892,10
+"LC","Linguagens, Códigos e suas Tecnologias","english","mae","EPE - Fisher",0.0180078668970056,0.0179300477129348,-0.022724258600124,0.0752645291463873,10
+"LC","Linguagens, Códigos e suas Tecnologias","english","bias","EPE - Fisher",-0.0047041318694318,0.00451633700646501,-0.140044723001455,0.109873521432438,10
+"LC","Linguagens, Códigos e suas Tecnologias","english","mean_items","EPE - Fisher",0,0,0,0,10
+"LC","Linguagens, Códigos e suas Tecnologias","english","mean_posterior_sd","EPE - Fisher",0.00233871765734172,0.0012475456030351,-0.0171686586218789,0.0249782553467523,10
+"LC","Linguagens, Códigos e suas Tecnologias","english","target_attainment","EPE - Fisher",-0.008,0.02,-0.12,0.08,10
+"LC","Linguagens, Códigos e suas Tecnologias","english","full_length_rate","EPE - Fisher",0,0,0,0,10
+"LC","Linguagens, Códigos e suas Tecnologias","spanish","rmse","EPE - Fisher",0.0218480281891002,0.0195361874909226,-0.0271443400576859,0.0614043759114788,10
+"LC","Linguagens, Códigos e suas Tecnologias","spanish","mae","EPE - Fisher",0.0209815284339026,0.0246472949029373,-0.00822401845991485,0.0515971803353804,10
+"LC","Linguagens, Códigos e suas Tecnologias","spanish","bias","EPE - Fisher",-0.00349894400728876,0.00552758489861991,-0.132468965481191,0.108849372120931,10
+"LC","Linguagens, Códigos e suas Tecnologias","spanish","mean_items","EPE - Fisher",0,0,0,0,10
+"LC","Linguagens, Códigos e suas Tecnologias","spanish","mean_posterior_sd","EPE - Fisher",0.00157776637495366,0.00377651196570553,-0.0222656763152387,0.018943271838001,10
+"LC","Linguagens, Códigos e suas Tecnologias","spanish","target_attainment","EPE - Fisher",0.00800000000000001,0,-0.102,0.142,10
+"LC","Linguagens, Códigos e suas Tecnologias","spanish","full_length_rate","EPE - Fisher",0,0,0,0,10
+"CH","Ciências Humanas e suas Tecnologias",NA,"rmse","EPE - Fisher",-0.00204308541012041,-0.00684654171824198,-0.118991290645633,0.109889899526812,10
+"CH","Ciências Humanas e suas Tecnologias",NA,"mae","EPE - Fisher",0.0159215426732747,0.0259497555857283,-0.0608264276094358,0.0829024161887192,10
+"CH","Ciências Humanas e suas Tecnologias",NA,"bias","EPE - Fisher",0.0261832206178988,0.0447400651863346,-0.11709124236863,0.127920126560136,10
+"CH","Ciências Humanas e suas Tecnologias",NA,"mean_items","EPE - Fisher",-1.172,-0.899999999999999,-5.71,2.215,10
+"CH","Ciências Humanas e suas Tecnologias",NA,"mean_posterior_sd","EPE - Fisher",-0.0047538579585652,-0.0035281651541671,-0.0418905648876777,0.022385923825762,10
+"CH","Ciências Humanas e suas Tecnologias",NA,"target_attainment","EPE - Fisher",0.028,0.02,-0.08,0.142,10
+"CH","Ciências Humanas e suas Tecnologias",NA,"full_length_rate","EPE - Fisher",-0.028,-0.02,-0.142,0.08,10
+"CN","Ciências da Natureza e suas Tecnologias",NA,"rmse","EPE - Fisher",-0.0303636455758621,-0.0184301762222827,-0.271740827128007,0.158864180106381,10
+"CN","Ciências da Natureza e suas Tecnologias",NA,"mae","EPE - Fisher",-0.0104156066147444,-0.0227199468792246,-0.0988337375690578,0.121026510937356,10
+"CN","Ciências da Natureza e suas Tecnologias",NA,"bias","EPE - Fisher",-0.0191279927228639,-0.0392369000024267,-0.184984184914233,0.167811080136727,10
+"CN","Ciências da Natureza e suas Tecnologias",NA,"mean_items","EPE - Fisher",-1.14,-0.399999999999999,-4.244,1.284,10
+"CN","Ciências da Natureza e suas Tecnologias",NA,"mean_posterior_sd","EPE - Fisher",-0.00404738735378118,-0.00226636158952243,-0.0214410166847525,0.00948518179426125,10
+"CN","Ciências da Natureza e suas Tecnologias",NA,"target_attainment","EPE - Fisher",0.024,0,-0.04,0.111,10
+"CN","Ciências da Natureza e suas Tecnologias",NA,"full_length_rate","EPE - Fisher",-0.024,0,-0.111,0.04,10
+"MT","Matemática e suas Tecnologias",NA,"rmse","EPE - Fisher",-0.0139241375893491,-0.0281664016258759,-0.0950474388474676,0.0572645323985236,10
+"MT","Matemática e suas Tecnologias",NA,"mae","EPE - Fisher",0.000624279117636273,0.0101065053820984,-0.064701591534467,0.063595506560077,10
+"MT","Matemática e suas Tecnologias",NA,"bias","EPE - Fisher",-0.0618121173321785,-0.097825509475506,-0.185122253059706,0.120776012249774,10
+"MT","Matemática e suas Tecnologias",NA,"mean_items","EPE - Fisher",-0.223999999999999,-0.619999999999997,-3.469,3.463,10
+"MT","Matemática e suas Tecnologias",NA,"mean_posterior_sd","EPE - Fisher",0.00894476763448943,0.0159036514171689,-0.0358811796567767,0.0386319606884431,10
+"MT","Matemática e suas Tecnologias",NA,"target_attainment","EPE - Fisher",0.00399999999999999,0.02,-0.111,0.111,10
+"MT","Matemática e suas Tecnologias",NA,"full_length_rate","EPE - Fisher",-0.00399999999999998,-0.02,-0.111,0.111,10

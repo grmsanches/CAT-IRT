@@ -1,28 +1,46 @@
-<img src="./assets/banner.jpg" alt="Banner" width="100%" height="300" style="display: block; object-fit: cover;">
+# CAT com parâmetros de itens do Enem 2023
 
-# Testes Adaptativos Computadorizados na TRI
-Uma comparação entre métodos utilizados em **Testes Adaptativos Computadorizados** (CAT, na sigla em inglês) no contexto da Teoria de Resposta ao Item (TRI): **informação de Fisher versus entropia a posteriori esperada**.
+## Arquivos
 
-A proposta é utilizar todas as informações contidas na distribuição a posteriori do parâmetro estimado (parâmetro de proficiência) para selecionar o próximo item a ser apresentado ao participante, em vez de depender apenas da informação local captada pelo método baseado na informação de Fisher.
+Baixar microdados [aqui](https://download.inep.gov.br/microdados/microdados_enem_2023.zip).
 
-Espera-se que o método proposto seja capaz de **reduzir o número de perguntas necessárias** para se obter uma estimativa razoáveç para o traço latente do candidato.
+- `prepare_ENEM.R`: prepara respostas, mapas, auditorias e bancos por área.
+- `analyze_cat.R`: simulações Monte Carlo por área e língua em LC.
+- `cat.R`: 3PL, seleção Fisher/EPE e restrições de composição.
+- `interpretation.qmd`: relatório acadêmico em português.
+- `Dicionário_Microdados_Enem_2023.xlsx`: definições/códigos oficiais.
+- `enem_2023_dictionary_mapping.R`, `Dicionario_revisao.md`: mapeamento e interpretação do dicionário.
+- `validate_ENEM_LC_source_updated.R`: pré-validação dos CSVs fonte para LC.
+- `test_lc_structure_updated.R`: teste sintético da restrição no CAT.
 
-# Fonte
+Os arquivos `_updated` são substituições propostas; os arquivos originais não puderam ser sobrescritos neste ambiente. Faça backup e substitua os arquivos canônicos pelas versões correspondentes antes de executar.
 
-Os dados foram obtidos por meio deste [link](https://download.inep.gov.br/microdados/microdados_enem_2023.zip).
+## Formulários padrão
 
-# Metodologia
+Códigos do dicionário: LC `CO_PROVA_LC` 1201–1204; CH `CO_PROVA_CH` 1191–1194; CN `CO_PROVA_CN` 1221–1224; MT `CO_PROVA_MT` 1211–1214. Reaplicações e formas ampliadas/adaptadas usam outros códigos e não entram automaticamente no banco padrão.
 
-Para este projeto, **consideramos apenas o caderno de matemática as provas Azul, Amarela, Rosa e Cinza** (cujos respectivos códigos são: 1211, 1212, 1213, 1214). Removemos da análise os candidatos com valores desconhecidos para alguma das seguintes colunas (as colunas de interesse para o projeto):
+## Linguagens (LC)
 
-- *NU_NOTA_MT*
-- *TX_RESPOSTAS_MT*
-- *TX_GABARITO_MT*
-- *CO_PROVA_MT*
+O arquivo de itens tem 50 registros por forma, representando 45 posições: 40 questões comuns e duas alternativas de cinco questões (inglês/espanhol). `TP_LINGUA` identifica 0 = inglês e 1 = espanhol. O dicionário especifica 45 caracteres em `TX_RESPOSTAS_LC` e 50 em `TX_GABARITO_LC`: as cinco respostas iniciais usam a chave da língua escolhida, e as 40 seguintes correspondem às posições 11–50 do gabarito.
 
-Nossa base de dados foi, então, de aproximadamente 4 milhões de observações para 2.7 milhões (uma redução em torno de 32.5%).
+A preparação preserva os 50 registros, valida a classificação por idioma e cria pools elegíveis inglês/espanhol. Cada trajetória LC usa exatamente 40 itens comuns e cinco itens de uma só língua. Nunca administra as duas alternativas. Se exclusões anuladas ou parâmetros ineligíveis deixarem menos de 40 comuns ou cinco da língua, a simulação falha sem substituições. Como LC deve ter 45 itens, DP posterior ≤0,6 é avaliado ao final da prova, não usado para interromper antecipadamente. Em CH/CN/MT, permanece a parada por DP≤0,6 ou esgotamento do banco.
 
+## Exclusões e metodologia
 
-O órgão estima um traço latente $\theta$ para cada área, isto é, um para Ciências da natureza, um para matemática, e assim por diante. Nesta análise, tomaremos apenas as questões do caderno de matemática. Com relação aos parâmetros de cada questão para o modelo TRI-3PL, o INEP os calibra previamente utilizando algoritmos de **máxima verossimilhança marginal**. Então, ao aplicar a prova, o único parâmetro a ser estimado é o traço latente de habilidade do aluno. 
+`IN_ITEM_ABAN == 1` e `TX_GABARITO == "X"` indicam anulação conforme o dicionário. Parâmetros A/B/C ausentes ou inválidos e inconsistência entre aparições de `CO_ITEM` impedem elegibilidade; nada é imputado. Status e motivos são auditados. Não há no dicionário variável específica de falha de convergência; ausência de parâmetro não é classificada automaticamente como convergência.
 
-Para estimar o traço latente, o órgão adota uma abordagem bayesiana para evitar problemas de estimação decorrentes de casos em que um aluno acertasse todas as questões (ou errasse todas as questões). Assume-se que a dsitribuição a priori do parâmetro de habilidade (traço latente) de cada candidato é uma normal padrão. Então, na medida em que se verifica os acertos do candidato com respostas às questões e seus respectivos parâmetros, atualiza-se a distribuição destes parâmetros. Ao final da avaliação de todas as questões, a estimativa pontual é obitda via **EAP - Expected A Posteriori**. Então, soma-se multiplica-se por 100 e soma-se 500 à esta estimativa (para reescalar para uma normal com média 500 e desvio padrão 100, que escala utilizada no ENEM).
+Fisher e EPE usam 3PL, priori normal padrão e posterior em grade de 301 pontos entre −4 e 4. As habilidades/respostas são simuladas; RMSE, MAE e viés não são erros observados de candidatos. Nas comparações LC, os dois métodos usam o mesmo banco por idioma e as mesmas quotas.
+
+## Execução
+
+Requisitos: R, `data.table`, `arrow` e Quarto. Com os microdados originais em `DADOS`:
+
+```sh
+Rscript validate_ENEM_LC_source_updated.R --data-dir=/caminho/microdados_enem_2023/DADOS
+Rscript prepare_ENEM.R --data-dir=/caminho/microdados_enem_2023/DADOS
+Rscript test_lc_structure_updated.R
+Rscript analyze_cat.R --replications=100 --n=50 --seed=2025
+quarto render interpretation.qmd
+```
+
+A pré-validação confere os registros/posições LC, grupos `TP_LINGUA` e comprimentos dos vetores. A preparação repete as verificações estruturais e compara chaves. Se qualquer critério falhar, investigue a fonte em vez de inferir ou remover itens. Os arquivos de origem não estavam disponíveis nesta revisão; execução, reconciliação das contagens, escala dos parâmetros e renderização ainda precisam ser confirmadas. Nenhum resultado empírico foi produzido aqui.

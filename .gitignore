@@ -1,0 +1,18 @@
+# ENEM datasets
+microdados_enem_2023/
+data/processed/
+*.parquet
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+
+# Quarto
+.quarto/
+*_cache/
+*_files/
+
+# Operating system
+.DS_Store
+Thumbs.db

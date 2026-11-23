@@ -1,0 +1,5 @@
+"bank","method","rmse","mae","bias","mean_items","mean_posterior_sd","target_attainment","metric_scope"
+"enem_verified","entropy",0.594795612129102,0.455288064383434,-0.0062200057956975,19.6946,0.588203658004955,0.6112,"50 Monte Carlo replications"
+"synthetic_demo","entropy",0.568835471095971,0.440079189512421,0.00116469987230885,3.9824,0.563388251256353,1,"50 Monte Carlo replications"
+"enem_verified","fisher",0.594273150831283,0.452186643743712,0.0128354079634091,19.9884,0.583782534262297,0.6028,"50 Monte Carlo replications"
+"synthetic_demo","fisher",0.584430834975662,0.447351307182522,0.00523411222573345,3.666,0.571065932057819,1,"50 Monte Carlo replications"
