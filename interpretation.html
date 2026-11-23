@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Projeto de pesquisa">
+
+<title>Comparação de métodos de seleção em CAT com parâmetros de itens do Enem 2023</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="interpretation_files/libs/clipboard/clipboard.min.js"></script>
+<script src="interpretation_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="interpretation_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="interpretation_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="interpretation_files/libs/quarto-html/popper.min.js"></script>
+<script src="interpretation_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="interpretation_files/libs/quarto-html/anchor.min.js"></script>
+<link href="interpretation_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="interpretation_files/libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="interpretation_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="interpretation_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="interpretation_files/libs/bootstrap/bootstrap-9e3ffae467580fdb927a41352e75a2e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Índice</h2>
+   
+  <ul>
+  <li><a href="#introdução-e-contextualização" id="toc-introdução-e-contextualização" class="nav-link active" data-scroll-target="#introdução-e-contextualização"><span class="header-section-number">1</span> 1. Introdução e contextualização</a></li>
+  <li><a href="#objetivos-e-pergunta-de-pesquisa" id="toc-objetivos-e-pergunta-de-pesquisa" class="nav-link" data-scroll-target="#objetivos-e-pergunta-de-pesquisa"><span class="header-section-number">2</span> 2. Objetivos e pergunta de pesquisa</a></li>
+  <li><a href="#dados-e-formulários" id="toc-dados-e-formulários" class="nav-link" data-scroll-target="#dados-e-formulários"><span class="header-section-number">3</span> 3. Dados e formulários</a></li>
+  <li><a href="#elegibilidade-exclusões-e-bancos" id="toc-elegibilidade-exclusões-e-bancos" class="nav-link" data-scroll-target="#elegibilidade-exclusões-e-bancos"><span class="header-section-number">4</span> 4. Elegibilidade, exclusões e bancos</a></li>
+  <li><a href="#metodologia-cat" id="toc-metodologia-cat" class="nav-link" data-scroll-target="#metodologia-cat"><span class="header-section-number">5</span> 5. Metodologia CAT</a></li>
+  <li><a href="#métodos-de-seleção" id="toc-métodos-de-seleção" class="nav-link" data-scroll-target="#métodos-de-seleção"><span class="header-section-number">6</span> 6. Métodos de seleção</a></li>
+  <li><a href="#composição-simulações-e-critério-de-precisão" id="toc-composição-simulações-e-critério-de-precisão" class="nav-link" data-scroll-target="#composição-simulações-e-critério-de-precisão"><span class="header-section-number">7</span> 7. Composição, simulações e critério de precisão</a></li>
+  <li><a href="#resultados-por-área-e-língua" id="toc-resultados-por-área-e-língua" class="nav-link" data-scroll-target="#resultados-por-área-e-língua"><span class="header-section-number">8</span> 8. Resultados por área e língua</a></li>
+  <li><a href="#comparação-entre-fisher-e-epe" id="toc-comparação-entre-fisher-e-epe" class="nav-link" data-scroll-target="#comparação-entre-fisher-e-epe"><span class="header-section-number">9</span> 9. Comparação entre Fisher e EPE</a></li>
+  <li><a href="#discussão" id="toc-discussão" class="nav-link" data-scroll-target="#discussão"><span class="header-section-number">10</span> 10. Discussão</a></li>
+  <li><a href="#limitações" id="toc-limitações" class="nav-link" data-scroll-target="#limitações"><span class="header-section-number">11</span> 11. Limitações</a></li>
+  <li><a href="#conclusão" id="toc-conclusão" class="nav-link" data-scroll-target="#conclusão"><span class="header-section-number">12</span> 12. Conclusão</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Outros formatos</h2><ul><li><a href="interpretation.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Comparação de métodos de seleção em CAT com parâmetros de itens do Enem 2023</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor</div>
+    <div class="quarto-title-meta-contents">
+             <p>Projeto de pesquisa </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introdução-e-contextualização" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 1. Introdução e contextualização</h1>
+<p>Testes adaptativos computadorizados (CAT) selecionam itens sequencialmente a partir das respostas anteriores, buscando alocar itens informativos e controlar a precisão da medida. Este estudo compara seleção por informação de Fisher e entropia posterior esperada (EPE), por simulação Monte Carlo sob o modelo logístico de três parâmetros (3PL), utilizando parâmetros de itens provenientes dos arquivos do Enem 2023.</p>
+<p>A análise é condicional à construção dos bancos, à escala dos parâmetros, ao modelo, à priori e às regras de composição e parada. Habilidades e respostas são simuladas; os resultados não descrevem desempenho adaptativo de candidatos reais.</p>
+</section>
+<section id="objetivos-e-pergunta-de-pesquisa" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 2. Objetivos e pergunta de pesquisa</h1>
+<p>Comparam-se Fisher e EPE quanto ao RMSE, MAE, viés em relação à habilidade simulada, desvio-padrão posterior, número de itens e alcance do alvo. A pergunta é quais diferenças numéricas entre os métodos são observadas dentro de cada banco e sob condições de simulação comuns. Não se pressupõe a superioridade de qualquer método.</p>
+</section>
+<section id="dados-e-formulários" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 3. Dados e formulários</h1>
+<p>O dicionário documenta os formulários padrão: LC (<code>CO_PROVA_LC</code>) 1201–1204; CH (<code>CO_PROVA_CH</code>) 1191–1194; CN (<code>CO_PROVA_CN</code>) 1221–1224; MT (<code>CO_PROVA_MT</code>) 1211–1214. Reaplicações e provas ampliadas/adaptadas possuem códigos distintos e não são incluídas como formas padrão. A preparação precisa associar área, código de prova, posição e <code>CO_ITEM</code>, e verificar as chaves dos candidatos contra o arquivo de itens.</p>
+<p>Em LC, há 50 registros de itens por forma e 45 posições de questão: 40 questões comuns, cinco de inglês e cinco alternativas de espanhol. Cada candidato responde a uma das duas línguas, não a ambas. O dicionário documenta <code>TP_LINGUA</code> (0 = inglês; 1 = espanhol) nos dados dos participantes e de itens. A preparação preserva os 50 registros, exige que os dados confirmem 40 posições comuns e cinco posições compartilhadas por pares de itens linguísticos (um por idioma), e constrói pools de itens separados por língua. O gabarito LC tem 50 caracteres e as respostas 45: as primeiras cinco respostas são alinhadas às posições 1–5 para inglês ou 6–10 para espanhol; as 40 restantes alinham-se às posições 11–50. A preparação interrompe-se se os dados não confirmarem essa estrutura; as classificações não são inferidas de contagens inesperadas.</p>
+</section>
+<section id="elegibilidade-exclusões-e-bancos" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> 4. Elegibilidade, exclusões e bancos</h1>
+<p><code>IN_ITEM_ABAN</code> indica item abandonado (0 = não; 1 = sim); o dicionário informa também que <code>TX_GABARITO == "X"</code> indica anulação, e <code>TX_MOTIVO_ABAN</code> registra motivo quando disponível. Itens anulados não entram nos bancos. Parâmetros A/B/C ausentes ou inválidos e inconsistência entre aparições do mesmo <code>CO_ITEM</code> também impedem elegibilidade, sem imputação. Status ausentes, inesperados e divergências são registrados na auditoria. O dicionário não documenta uma variável própria de falha de calibração/convergência, portanto essa causa não é atribuída a parâmetro ausente.</p>
+<p>Para LC, os bancos inglês e espanhol contêm apenas itens comuns e itens da alternativa correspondente, após as mesmas regras de elegibilidade. Se não houver pelo menos 40 itens comuns elegíveis e cinco itens elegíveis da língua escolhida, não é possível compor uma prova de 45 itens sem substituição indevida; a simulação deve parar e registrar a limitação.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Identificação, elegibilidade e exclusões auditadas por área</caption>
+<colgroup>
+<col style="width: 1%">
+<col style="width: 2%">
+<col style="width: 6%">
+<col style="width: 2%">
+<col style="width: 11%">
+<col style="width: 9%">
+<col style="width: 5%">
+<col style="width: 7%">
+<col style="width: 4%">
+<col style="width: 9%">
+<col style="width: 5%">
+<col style="width: 9%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">AREA</th>
+<th style="text-align: left;">language</th>
+<th style="text-align: right;">initially_identified</th>
+<th style="text-align: right;">annulled</th>
+<th style="text-align: left;">calibration_convergence_identifiable</th>
+<th style="text-align: right;">missing_or_invalid_parameters</th>
+<th style="text-align: right;">other_exclusions</th>
+<th style="text-align: right;">eligible_unique_items</th>
+<th style="text-align: right;">reconciliation</th>
+<th style="text-align: right;">initially_identified_common</th>
+<th style="text-align: right;">eligible_common</th>
+<th style="text-align: right;">initially_identified_language</th>
+<th style="text-align: right;">eligible_language</th>
+<th style="text-align: right;">required_common</th>
+<th style="text-align: right;">required_language</th>
+<th style="text-align: left;">structure_available</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">CH</td>
+<td style="text-align: left;"></td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LC</td>
+<td style="text-align: left;">english</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LC</td>
+<td style="text-align: left;">spanish</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LC</td>
+<td style="text-align: left;"></td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CN</td>
+<td style="text-align: left;"></td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MT</td>
+<td style="text-align: left;"></td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="metodologia-cat" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> 5. Metodologia CAT</h1>
+<p>O simulador utiliza modelo 3PL, constante logística 1,7, priori normal padrão e distribuição posterior calculada em uma grade de 301 pontos entre −4 e 4. A estimativa pontual é a média posterior. A habilidade verdadeira simulada provém de uma distribuição normal padrão; respostas são geradas condicionalmente à habilidade e aos parâmetros dos itens. O RMSE, o MAE e o viés, portanto, medem discrepâncias relativas à habilidade simulada, não erros observados em candidatos.</p>
+</section>
+<section id="métodos-de-seleção" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> 6. Métodos de seleção</h1>
+<p>Fisher seleciona, entre os itens elegíveis disponíveis, o item de maior informação avaliada na estimativa EAP atual. EPE seleciona o item que maximiza a redução esperada da entropia posterior sob os dois resultados possíveis. As duas estratégias recebem o mesmo pool por área/língua e as mesmas condições de simulação. Na simulação LC, a seleção é restrita aos grupos de itens cuja quota ainda não foi atingida.</p>
+</section>
+<section id="composição-simulações-e-critério-de-precisão" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> 7. Composição, simulações e critério de precisão</h1>
+<p>Para CH, CN e MT, o critério continua sendo encerramento quando <code>SD(θ | respostas) ≤ 0,35</code> ou quando o banco elegível se esgota. Para LC, a exigência de exatamente 45 itens por trajetória — 40 comuns e cinco da alternativa selecionada — impede a parada antecipada sem violar a estrutura da prova. Assim, Fisher e EPE administram exatamente 45 itens LC, não combinam inglês e espanhol, e o valor 0,35 é avaliado como meta de precisão ao final da prova, não como regra de parada antecipada para LC. Esta distinção é necessária para satisfazer simultaneamente a composição fixa e a meta de DP posterior.</p>
+<p>A análise padrão usa 50 habilidades simuladas por repetição e 100 repetições, com sementes controladas. As simulações LC inglês e espanhol são comparações separadas. A tabela individual conserva a contagem por grupo e o indicador de validade estrutural para cada trajetória.</p>
+</section>
+<section id="resultados-por-área-e-língua" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> 8. Resultados por área e língua</h1>
+<p>Os resultados devem ser interpretados somente após preparação e execução sem erro. RMSE e MAE medem erro em relação à habilidade simulada; viés é a média de estimativa menos habilidade simulada. O DP posterior descreve a incerteza interna do modelo. Taxa de alcance é a proporção de trajetórias com DP final ≤ 0,35. Para LC, a taxa é aferida após 45 itens e a validade da estrutura deve ser verdadeira em todas as trajetórias. Pools elegíveis de inglês e espanhol podem ter tamanhos diferentes; isso deve ser considerado na interpretação.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Métricas Monte Carlo por área, método e língua quando aplicável</caption>
+<colgroup>
+<col style="width: 2%">
+<col style="width: 20%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 10%">
+<col style="width: 6%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 5%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">AREA</th>
+<th style="text-align: left;">area_name</th>
+<th style="text-align: left;">language</th>
+<th style="text-align: left;">method</th>
+<th style="text-align: right;">eligible_pool_items</th>
+<th style="text-align: right;">replications</th>
+<th style="text-align: right;">rmse</th>
+<th style="text-align: right;">mae</th>
+<th style="text-align: right;">bias</th>
+<th style="text-align: right;">mean_items</th>
+<th style="text-align: right;">mean_posterior_sd</th>
+<th style="text-align: right;">target_attainment</th>
+<th style="text-align: right;">full_length_rate</th>
+<th style="text-align: left;">structure_valid</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">LC</td>
+<td style="text-align: left;">Linguagens, Códigos e suas Tecnologias</td>
+<td style="text-align: left;">english</td>
+<td style="text-align: left;">entropy</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.306</td>
+<td style="text-align: right;">0.214</td>
+<td style="text-align: right;">-0.011</td>
+<td style="text-align: right;">45.000</td>
+<td style="text-align: right;">0.256</td>
+<td style="text-align: right;">0.800</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CH</td>
+<td style="text-align: left;">Ciências Humanas e suas Tecnologias</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">entropy</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.360</td>
+<td style="text-align: right;">0.284</td>
+<td style="text-align: right;">0.009</td>
+<td style="text-align: right;">18.200</td>
+<td style="text-align: right;">0.375</td>
+<td style="text-align: right;">0.692</td>
+<td style="text-align: right;">0.308</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CN</td>
+<td style="text-align: left;">Ciências da Natureza e suas Tecnologias</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">entropy</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.482</td>
+<td style="text-align: right;">0.360</td>
+<td style="text-align: right;">0.046</td>
+<td style="text-align: right;">27.396</td>
+<td style="text-align: right;">0.420</td>
+<td style="text-align: right;">0.452</td>
+<td style="text-align: right;">0.548</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MT</td>
+<td style="text-align: left;">Matemática e suas Tecnologias</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">entropy</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.516</td>
+<td style="text-align: right;">0.392</td>
+<td style="text-align: right;">-0.016</td>
+<td style="text-align: right;">32.548</td>
+<td style="text-align: right;">0.512</td>
+<td style="text-align: right;">0.304</td>
+<td style="text-align: right;">0.696</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LC</td>
+<td style="text-align: left;">Linguagens, Códigos e suas Tecnologias</td>
+<td style="text-align: left;">spanish</td>
+<td style="text-align: left;">entropy</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.264</td>
+<td style="text-align: right;">0.204</td>
+<td style="text-align: right;">-0.012</td>
+<td style="text-align: right;">45.000</td>
+<td style="text-align: right;">0.258</td>
+<td style="text-align: right;">0.820</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LC</td>
+<td style="text-align: left;">Linguagens, Códigos e suas Tecnologias</td>
+<td style="text-align: left;">english</td>
+<td style="text-align: left;">fisher</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.278</td>
+<td style="text-align: right;">0.196</td>
+<td style="text-align: right;">-0.007</td>
+<td style="text-align: right;">45.000</td>
+<td style="text-align: right;">0.254</td>
+<td style="text-align: right;">0.808</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CH</td>
+<td style="text-align: left;">Ciências Humanas e suas Tecnologias</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">fisher</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.362</td>
+<td style="text-align: right;">0.268</td>
+<td style="text-align: right;">-0.017</td>
+<td style="text-align: right;">19.372</td>
+<td style="text-align: right;">0.380</td>
+<td style="text-align: right;">0.664</td>
+<td style="text-align: right;">0.336</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CN</td>
+<td style="text-align: left;">Ciências da Natureza e suas Tecnologias</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">fisher</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.512</td>
+<td style="text-align: right;">0.371</td>
+<td style="text-align: right;">0.065</td>
+<td style="text-align: right;">28.536</td>
+<td style="text-align: right;">0.424</td>
+<td style="text-align: right;">0.428</td>
+<td style="text-align: right;">0.572</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MT</td>
+<td style="text-align: left;">Matemática e suas Tecnologias</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">fisher</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.529</td>
+<td style="text-align: right;">0.391</td>
+<td style="text-align: right;">0.045</td>
+<td style="text-align: right;">32.772</td>
+<td style="text-align: right;">0.504</td>
+<td style="text-align: right;">0.300</td>
+<td style="text-align: right;">0.700</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LC</td>
+<td style="text-align: left;">Linguagens, Códigos e suas Tecnologias</td>
+<td style="text-align: left;">spanish</td>
+<td style="text-align: left;">fisher</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.242</td>
+<td style="text-align: right;">0.183</td>
+<td style="text-align: right;">-0.009</td>
+<td style="text-align: right;">45.000</td>
+<td style="text-align: right;">0.257</td>
+<td style="text-align: right;">0.812</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Verificação da composição das trajetórias LC</caption>
+<colgroup>
+<col style="width: 4%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 8%">
+<col style="width: 31%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">language</th>
+<th style="text-align: right;">n_common</th>
+<th style="text-align: right;">n_english</th>
+<th style="text-align: right;">n_spanish</th>
+<th style="text-align: right;">n_items</th>
+<th style="text-align: right;">language_alternatives_in_test</th>
+<th style="text-align: left;">structure_valid</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">english</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">501</td>
+<td style="text-align: left;">spanish</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="comparação-entre-fisher-e-epe" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> 9. Comparação entre Fisher e EPE</h1>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Contrastes emparelhados EPE − Fisher entre repetições</caption>
+<colgroup>
+<col style="width: 3%">
+<col style="width: 25%">
+<col style="width: 5%">
+<col style="width: 11%">
+<col style="width: 8%">
+<col style="width: 10%">
+<col style="width: 11%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">AREA</th>
+<th style="text-align: left;">area_name</th>
+<th style="text-align: left;">language</th>
+<th style="text-align: left;">metric</th>
+<th style="text-align: left;">contrast</th>
+<th style="text-align: right;">mean_difference</th>
+<th style="text-align: right;">median_difference</th>
+<th style="text-align: right;">lower_95_MC</th>
+<th style="text-align: right;">upper_95_MC</th>
+<th style="text-align: right;">replications</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">LC</td>
+<td style="text-align: left;">Linguagens, Códigos e suas Tecnologias</td>
+<td style="text-align: left;">english</td>
+<td style="text-align: left;">rmse</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">0.028</td>
+<td style="text-align: right;">0.012</td>
+<td style="text-align: right;">-0.020</td>
+<td style="text-align: right;">0.130</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LC</td>
+<td style="text-align: left;">Linguagens, Códigos e suas Tecnologias</td>
+<td style="text-align: left;">english</td>
+<td style="text-align: left;">mae</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">0.018</td>
+<td style="text-align: right;">0.018</td>
+<td style="text-align: right;">-0.023</td>
+<td style="text-align: right;">0.075</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LC</td>
+<td style="text-align: left;">Linguagens, Códigos e suas Tecnologias</td>
+<td style="text-align: left;">english</td>
+<td style="text-align: left;">bias</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">-0.005</td>
+<td style="text-align: right;">0.005</td>
+<td style="text-align: right;">-0.140</td>
+<td style="text-align: right;">0.110</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LC</td>
+<td style="text-align: left;">Linguagens, Códigos e suas Tecnologias</td>
+<td style="text-align: left;">english</td>
+<td style="text-align: left;">mean_items</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LC</td>
+<td style="text-align: left;">Linguagens, Códigos e suas Tecnologias</td>
+<td style="text-align: left;">english</td>
+<td style="text-align: left;">mean_posterior_sd</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">0.002</td>
+<td style="text-align: right;">0.001</td>
+<td style="text-align: right;">-0.017</td>
+<td style="text-align: right;">0.025</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LC</td>
+<td style="text-align: left;">Linguagens, Códigos e suas Tecnologias</td>
+<td style="text-align: left;">english</td>
+<td style="text-align: left;">target_attainment</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">-0.008</td>
+<td style="text-align: right;">0.020</td>
+<td style="text-align: right;">-0.120</td>
+<td style="text-align: right;">0.080</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LC</td>
+<td style="text-align: left;">Linguagens, Códigos e suas Tecnologias</td>
+<td style="text-align: left;">english</td>
+<td style="text-align: left;">full_length_rate</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LC</td>
+<td style="text-align: left;">Linguagens, Códigos e suas Tecnologias</td>
+<td style="text-align: left;">spanish</td>
+<td style="text-align: left;">rmse</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">0.022</td>
+<td style="text-align: right;">0.020</td>
+<td style="text-align: right;">-0.027</td>
+<td style="text-align: right;">0.061</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LC</td>
+<td style="text-align: left;">Linguagens, Códigos e suas Tecnologias</td>
+<td style="text-align: left;">spanish</td>
+<td style="text-align: left;">mae</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">0.021</td>
+<td style="text-align: right;">0.025</td>
+<td style="text-align: right;">-0.008</td>
+<td style="text-align: right;">0.052</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LC</td>
+<td style="text-align: left;">Linguagens, Códigos e suas Tecnologias</td>
+<td style="text-align: left;">spanish</td>
+<td style="text-align: left;">bias</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">-0.003</td>
+<td style="text-align: right;">0.006</td>
+<td style="text-align: right;">-0.132</td>
+<td style="text-align: right;">0.109</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LC</td>
+<td style="text-align: left;">Linguagens, Códigos e suas Tecnologias</td>
+<td style="text-align: left;">spanish</td>
+<td style="text-align: left;">mean_items</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LC</td>
+<td style="text-align: left;">Linguagens, Códigos e suas Tecnologias</td>
+<td style="text-align: left;">spanish</td>
+<td style="text-align: left;">mean_posterior_sd</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">0.002</td>
+<td style="text-align: right;">0.004</td>
+<td style="text-align: right;">-0.022</td>
+<td style="text-align: right;">0.019</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LC</td>
+<td style="text-align: left;">Linguagens, Códigos e suas Tecnologias</td>
+<td style="text-align: left;">spanish</td>
+<td style="text-align: left;">target_attainment</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">0.008</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">-0.102</td>
+<td style="text-align: right;">0.142</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LC</td>
+<td style="text-align: left;">Linguagens, Códigos e suas Tecnologias</td>
+<td style="text-align: left;">spanish</td>
+<td style="text-align: left;">full_length_rate</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CH</td>
+<td style="text-align: left;">Ciências Humanas e suas Tecnologias</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">rmse</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">-0.002</td>
+<td style="text-align: right;">-0.007</td>
+<td style="text-align: right;">-0.119</td>
+<td style="text-align: right;">0.110</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CH</td>
+<td style="text-align: left;">Ciências Humanas e suas Tecnologias</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">mae</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">0.016</td>
+<td style="text-align: right;">0.026</td>
+<td style="text-align: right;">-0.061</td>
+<td style="text-align: right;">0.083</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CH</td>
+<td style="text-align: left;">Ciências Humanas e suas Tecnologias</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">bias</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">0.026</td>
+<td style="text-align: right;">0.045</td>
+<td style="text-align: right;">-0.117</td>
+<td style="text-align: right;">0.128</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CH</td>
+<td style="text-align: left;">Ciências Humanas e suas Tecnologias</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">mean_items</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">-1.172</td>
+<td style="text-align: right;">-0.900</td>
+<td style="text-align: right;">-5.710</td>
+<td style="text-align: right;">2.215</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CH</td>
+<td style="text-align: left;">Ciências Humanas e suas Tecnologias</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">mean_posterior_sd</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">-0.005</td>
+<td style="text-align: right;">-0.004</td>
+<td style="text-align: right;">-0.042</td>
+<td style="text-align: right;">0.022</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CH</td>
+<td style="text-align: left;">Ciências Humanas e suas Tecnologias</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">target_attainment</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">0.028</td>
+<td style="text-align: right;">0.020</td>
+<td style="text-align: right;">-0.080</td>
+<td style="text-align: right;">0.142</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CH</td>
+<td style="text-align: left;">Ciências Humanas e suas Tecnologias</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">full_length_rate</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">-0.028</td>
+<td style="text-align: right;">-0.020</td>
+<td style="text-align: right;">-0.142</td>
+<td style="text-align: right;">0.080</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CN</td>
+<td style="text-align: left;">Ciências da Natureza e suas Tecnologias</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">rmse</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">-0.030</td>
+<td style="text-align: right;">-0.018</td>
+<td style="text-align: right;">-0.272</td>
+<td style="text-align: right;">0.159</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CN</td>
+<td style="text-align: left;">Ciências da Natureza e suas Tecnologias</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">mae</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">-0.010</td>
+<td style="text-align: right;">-0.023</td>
+<td style="text-align: right;">-0.099</td>
+<td style="text-align: right;">0.121</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CN</td>
+<td style="text-align: left;">Ciências da Natureza e suas Tecnologias</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">bias</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">-0.019</td>
+<td style="text-align: right;">-0.039</td>
+<td style="text-align: right;">-0.185</td>
+<td style="text-align: right;">0.168</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CN</td>
+<td style="text-align: left;">Ciências da Natureza e suas Tecnologias</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">mean_items</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">-1.140</td>
+<td style="text-align: right;">-0.400</td>
+<td style="text-align: right;">-4.244</td>
+<td style="text-align: right;">1.284</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CN</td>
+<td style="text-align: left;">Ciências da Natureza e suas Tecnologias</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">mean_posterior_sd</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">-0.004</td>
+<td style="text-align: right;">-0.002</td>
+<td style="text-align: right;">-0.021</td>
+<td style="text-align: right;">0.009</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CN</td>
+<td style="text-align: left;">Ciências da Natureza e suas Tecnologias</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">target_attainment</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">0.024</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">-0.040</td>
+<td style="text-align: right;">0.111</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CN</td>
+<td style="text-align: left;">Ciências da Natureza e suas Tecnologias</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">full_length_rate</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">-0.024</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">-0.111</td>
+<td style="text-align: right;">0.040</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MT</td>
+<td style="text-align: left;">Matemática e suas Tecnologias</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">rmse</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">-0.014</td>
+<td style="text-align: right;">-0.028</td>
+<td style="text-align: right;">-0.095</td>
+<td style="text-align: right;">0.057</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MT</td>
+<td style="text-align: left;">Matemática e suas Tecnologias</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">mae</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">0.001</td>
+<td style="text-align: right;">0.010</td>
+<td style="text-align: right;">-0.065</td>
+<td style="text-align: right;">0.064</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MT</td>
+<td style="text-align: left;">Matemática e suas Tecnologias</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">bias</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">-0.062</td>
+<td style="text-align: right;">-0.098</td>
+<td style="text-align: right;">-0.185</td>
+<td style="text-align: right;">0.121</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MT</td>
+<td style="text-align: left;">Matemática e suas Tecnologias</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">mean_items</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">-0.224</td>
+<td style="text-align: right;">-0.620</td>
+<td style="text-align: right;">-3.469</td>
+<td style="text-align: right;">3.463</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MT</td>
+<td style="text-align: left;">Matemática e suas Tecnologias</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">mean_posterior_sd</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">0.009</td>
+<td style="text-align: right;">0.016</td>
+<td style="text-align: right;">-0.036</td>
+<td style="text-align: right;">0.039</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MT</td>
+<td style="text-align: left;">Matemática e suas Tecnologias</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">target_attainment</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">0.004</td>
+<td style="text-align: right;">0.020</td>
+<td style="text-align: right;">-0.111</td>
+<td style="text-align: right;">0.111</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MT</td>
+<td style="text-align: left;">Matemática e suas Tecnologias</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">full_length_rate</td>
+<td style="text-align: left;">EPE - Fisher</td>
+<td style="text-align: right;">-0.004</td>
+<td style="text-align: right;">-0.020</td>
+<td style="text-align: right;">-0.111</td>
+<td style="text-align: right;">0.111</td>
+<td style="text-align: right;">10</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Diferenças emparelhadas são descritas por média, mediana e percentis Monte Carlo. Esses percentis não são intervalos de confiança populacionais. Diferenças numéricas, isoladamente, não demonstram significância ou relevância prática; erro, precisão posterior e composição/quantidade de itens devem ser considerados em conjunto. Em LC, se os pools elegíveis contiverem exatamente 40 itens comuns e cinco da alternativa, ambos os métodos terão pouca ou nenhuma escolha entre itens dentro dos grupos; essa condição deve ser relatada, pois limita o contraste entre políticas adaptativas.</p>
+</section>
+<section id="discussão" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> 10. Discussão</h1>
+<p>A meta de DP posterior 0,35 é menos estrita do que alvos menores. Em CH, CN e MT ela participa da regra de encerramento; em LC é uma meta avaliada no fim de uma prova necessariamente fixa de 45 itens. A taxa de alcance e o uso do banco ajudam a avaliar se a precisão desejada foi obtida nas condições simuladas. Não atingir a meta não identifica isoladamente a causa nem demonstra inadequação dos itens.</p>
+<p>A estrutura fixa de LC também limita a interpretação do CAT: a simulação compara a ordem adaptativa de seleção sob quotas de conteúdo; não reduz a extensão da prova. Caso os bancos ofereçam apenas 40 itens comuns e cinco da língua, a seleção não dispõe de alternativas dentro dos grupos, e a comparação de métodos pode ser essencialmente uma comparação da ordem de administração, não de diferentes conjuntos de itens.</p>
+</section>
+<section id="limitações" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> 11. Limitações</h1>
+<ol type="1">
+<li>Trata-se de simulação com parâmetros derivados de itens do Enem, não de avaliação de candidatos reais.</li>
+<li>O dicionário especifica códigos e <code>TP_LINGUA</code>, mas a validação empírica da estrutura depende dos CSVs originais, não incluídos no fragmento recebido.</li>
+<li>A compatibilidade entre A/B/C, escala theta, priori e constante 1,7 exige confirmação documental.</li>
+<li>Não são realizadas calibração, análises de dimensionalidade, independência local, ajuste, DIF ou validação operacional.</li>
+<li>A classificação de convergência/calibração não é possível sem fonte independente; ausência de parâmetros não é suficiente para atribuir essa causa.</li>
+<li>Em LC, a prova é de comprimento fixo para satisfazer quotas 40+5; o alvo posterior 0,35 não pode causar interrupção antecipada. Diferenças no número de itens elegíveis de cada alternativa podem inviabilizar o banco e exigem reporte explícito.</li>
+<li>Os percentis de repetições descrevem variabilidade Monte Carlo, não incerteza populacional.</li>
+</ol>
+</section>
+<section id="conclusão" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> 12. Conclusão</h1>
+<p>A comparação de Fisher e EPE deve respeitar os bancos específicos de cada área. Para Linguagens, a estrutura documentada requer 40 itens comuns e cinco itens de apenas uma alternativa linguística, preservando no mapa os 50 registros originais. As quotas implementadas verificam essa composição na simulação e impedem mistura de idiomas; a meta de DP posterior 0,35 é avaliada ao final da aplicação LC fixa. Resultados só devem ser divulgados após execução e validação da preparação com os arquivos-fonte, reconciliação das exclusões e confirmação da escala dos parâmetros.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiada");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiada");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

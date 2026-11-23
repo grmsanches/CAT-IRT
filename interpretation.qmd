@@ -1,0 +1,99 @@
+---
+title: "Comparação de métodos de seleção em CAT com parâmetros de itens do Enem 2023"
+lang: pt-BR
+author: "Projeto de pesquisa"
+format:
+  html: {toc: true, number-sections: true}
+  pdf: {toc: true, number-sections: true, documentclass: scrartcl, papersize: a4}
+execute: {echo: false, warning: false, message: false}
+---
+
+```{r setup}
+knitr::opts_chunk$set(fig.align="center",out.width="95%")
+areas<-c(LC="Linguagens, Códigos e suas Tecnologias",CH="Ciências Humanas e suas Tecnologias",CN="Ciências da Natureza e suas Tecnologias",MT="Matemática e suas Tecnologias");p<-file.path("data","processed");r<-"results"
+need<-c(file.path(p,"enem_item_exclusion_summary.csv"),file.path(r,"enem_simulation_summary.csv"),file.path(r,"enem_paired_method_differences.csv"),file.path(r,"enem_simulation_person_level.csv"));if(any(!file.exists(need)))stop("Execute preparação e simulações; arquivos ausentes: ",paste(need[!file.exists(need)],collapse=", "))
+ex<-read.csv(need[1],check.names=FALSE);su<-read.csv(need[2],check.names=FALSE);pa<-read.csv(need[3],check.names=FALSE);pp<-read.csv(need[4],check.names=FALSE)
+if(!all(names(areas)%in%ex$AREA)||!all(names(areas)%in%su$AREA))stop("Resultados não incluem as quatro áreas.")
+```
+
+# 1. Introdução e contextualização
+
+Testes adaptativos computadorizados (CAT) selecionam itens sequencialmente a partir das respostas anteriores, buscando alocar itens informativos e controlar a precisão da medida. Este estudo compara seleção por informação de Fisher e entropia posterior esperada (EPE), por simulação Monte Carlo sob o modelo logístico de três parâmetros (3PL), utilizando parâmetros de itens provenientes dos arquivos do Enem 2023.
+
+A análise é condicional à construção dos bancos, à escala dos parâmetros, ao modelo, à priori e às regras de composição e parada. Habilidades e respostas são simuladas; os resultados não descrevem desempenho adaptativo de candidatos reais.
+
+# 2. Objetivos e pergunta de pesquisa
+
+Comparam-se Fisher e EPE quanto ao RMSE, MAE, viés em relação à habilidade simulada, desvio-padrão posterior, número de itens e alcance do alvo. A pergunta é quais diferenças numéricas entre os métodos são observadas dentro de cada banco e sob condições de simulação comuns. Não se pressupõe a superioridade de qualquer método.
+
+# 3. Dados e formulários
+
+O dicionário documenta os formulários padrão: LC (`CO_PROVA_LC`) 1201–1204; CH (`CO_PROVA_CH`) 1191–1194; CN (`CO_PROVA_CN`) 1221–1224; MT (`CO_PROVA_MT`) 1211–1214. Reaplicações e provas ampliadas/adaptadas possuem códigos distintos e não são incluídas como formas padrão. A preparação precisa associar área, código de prova, posição e `CO_ITEM`, e verificar as chaves dos candidatos contra o arquivo de itens.
+
+Em LC, há 50 registros de itens por forma e 45 posições de questão: 40 questões comuns, cinco de inglês e cinco alternativas de espanhol. Cada candidato responde a uma das duas línguas, não a ambas. O dicionário documenta `TP_LINGUA` (0 = inglês; 1 = espanhol) nos dados dos participantes e de itens. A preparação preserva os 50 registros, exige que os dados confirmem 40 posições comuns e cinco posições compartilhadas por pares de itens linguísticos (um por idioma), e constrói pools de itens separados por língua. O gabarito LC tem 50 caracteres e as respostas 45: as primeiras cinco respostas são alinhadas às posições 1–5 para inglês ou 6–10 para espanhol; as 40 restantes alinham-se às posições 11–50. A preparação interrompe-se se os dados não confirmarem essa estrutura; as classificações não são inferidas de contagens inesperadas.
+
+# 4. Elegibilidade, exclusões e bancos
+
+`IN_ITEM_ABAN` indica item abandonado (0 = não; 1 = sim); o dicionário informa também que `TX_GABARITO == "X"` indica anulação, e `TX_MOTIVO_ABAN` registra motivo quando disponível. Itens anulados não entram nos bancos. Parâmetros A/B/C ausentes ou inválidos e inconsistência entre aparições do mesmo `CO_ITEM` também impedem elegibilidade, sem imputação. Status ausentes, inesperados e divergências são registrados na auditoria. O dicionário não documenta uma variável própria de falha de calibração/convergência, portanto essa causa não é atribuída a parâmetro ausente.
+
+Para LC, os bancos inglês e espanhol contêm apenas itens comuns e itens da alternativa correspondente, após as mesmas regras de elegibilidade. Se não houver pelo menos 40 itens comuns elegíveis e cinco itens elegíveis da língua escolhida, não é possível compor uma prova de 45 itens sem substituição indevida; a simulação deve parar e registrar a limitação.
+
+```{r exclusions}
+knitr::kable(ex,caption="Identificação, elegibilidade e exclusões auditadas por área")
+```
+
+# 5. Metodologia CAT
+
+O simulador utiliza modelo 3PL, constante logística 1,7, priori normal padrão e distribuição posterior calculada em uma grade de 301 pontos entre −4 e 4. A estimativa pontual é a média posterior. A habilidade verdadeira simulada provém de uma distribuição normal padrão; respostas são geradas condicionalmente à habilidade e aos parâmetros dos itens. O RMSE, o MAE e o viés, portanto, medem discrepâncias relativas à habilidade simulada, não erros observados em candidatos.
+
+# 6. Métodos de seleção
+
+Fisher seleciona, entre os itens elegíveis disponíveis, o item de maior informação avaliada na estimativa EAP atual. EPE seleciona o item que maximiza a redução esperada da entropia posterior sob os dois resultados possíveis. As duas estratégias recebem o mesmo pool por área/língua e as mesmas condições de simulação. Na simulação LC, a seleção é restrita aos grupos de itens cuja quota ainda não foi atingida.
+
+# 7. Composição, simulações e critério de precisão
+
+Para CH, CN e MT, o critério continua sendo encerramento quando `SD(θ | respostas) ≤ 0,35` ou quando o banco elegível se esgota. Para LC, a exigência de exatamente 45 itens por trajetória — 40 comuns e cinco da alternativa selecionada — impede a parada antecipada sem violar a estrutura da prova. Assim, Fisher e EPE administram exatamente 45 itens LC, não combinam inglês e espanhol, e o valor 0,35 é avaliado como meta de precisão ao final da prova, não como regra de parada antecipada para LC. Esta distinção é necessária para satisfazer simultaneamente a composição fixa e a meta de DP posterior.
+
+A análise padrão usa 50 habilidades simuladas por repetição e 100 repetições, com sementes controladas. As simulações LC inglês e espanhol são comparações separadas. A tabela individual conserva a contagem por grupo e o indicador de validade estrutural para cada trajetória.
+
+# 8. Resultados por área e língua
+
+Os resultados devem ser interpretados somente após preparação e execução sem erro. RMSE e MAE medem erro em relação à habilidade simulada; viés é a média de estimativa menos habilidade simulada. O DP posterior descreve a incerteza interna do modelo. Taxa de alcance é a proporção de trajetórias com DP final ≤ 0,35. Para LC, a taxa é aferida após 45 itens e a validade da estrutura deve ser verdadeira em todas as trajetórias. Pools elegíveis de inglês e espanhol podem ter tamanhos diferentes; isso deve ser considerado na interpretação.
+
+```{r results}
+knitr::kable(su,digits=3,caption="Métricas Monte Carlo por área, método e língua quando aplicável")
+```
+
+```{r structure-check}
+lc<-pp[pp$AREA=="LC",]
+if(nrow(lc)&&(!all(lc$n_items==45L)||!all(lc$n_common==40L)||!all(lc$structure_valid)))stop("A saída LC não satisfaz 45 itens/40 comuns/5 da língua definida.")
+if(nrow(lc)){lc_display<-unique(lc[,intersect(c("language","n_common","n_english","n_spanish","n_items","language_alternatives_in_test","structure_valid"),names(lc))]);knitr::kable(lc_display,caption="Verificação da composição das trajetórias LC")}
+```
+
+# 9. Comparação entre Fisher e EPE
+
+```{r paired}
+knitr::kable(pa,digits=3,caption="Contrastes emparelhados EPE − Fisher entre repetições")
+```
+
+Diferenças emparelhadas são descritas por média, mediana e percentis Monte Carlo. Esses percentis não são intervalos de confiança populacionais. Diferenças numéricas, isoladamente, não demonstram significância ou relevância prática; erro, precisão posterior e composição/quantidade de itens devem ser considerados em conjunto. Em LC, se os pools elegíveis contiverem exatamente 40 itens comuns e cinco da alternativa, ambos os métodos terão pouca ou nenhuma escolha entre itens dentro dos grupos; essa condição deve ser relatada, pois limita o contraste entre políticas adaptativas.
+
+# 10. Discussão
+
+A meta de DP posterior 0,35 é menos estrita do que alvos menores. Em CH, CN e MT ela participa da regra de encerramento; em LC é uma meta avaliada no fim de uma prova necessariamente fixa de 45 itens. A taxa de alcance e o uso do banco ajudam a avaliar se a precisão desejada foi obtida nas condições simuladas. Não atingir a meta não identifica isoladamente a causa nem demonstra inadequação dos itens.
+
+A estrutura fixa de LC também limita a interpretação do CAT: a simulação compara a ordem adaptativa de seleção sob quotas de conteúdo; não reduz a extensão da prova. Caso os bancos ofereçam apenas 40 itens comuns e cinco da língua, a seleção não dispõe de alternativas dentro dos grupos, e a comparação de métodos pode ser essencialmente uma comparação da ordem de administração, não de diferentes conjuntos de itens.
+
+# 11. Limitações
+
+1. Trata-se de simulação com parâmetros derivados de itens do Enem, não de avaliação de candidatos reais.
+2. O dicionário especifica códigos e `TP_LINGUA`, mas a validação empírica da estrutura depende dos CSVs originais, não incluídos no fragmento recebido.
+3. A compatibilidade entre A/B/C, escala theta, priori e constante 1,7 exige confirmação documental.
+4. Não são realizadas calibração, análises de dimensionalidade, independência local, ajuste, DIF ou validação operacional.
+5. A classificação de convergência/calibração não é possível sem fonte independente; ausência de parâmetros não é suficiente para atribuir essa causa.
+6. Em LC, a prova é de comprimento fixo para satisfazer quotas 40+5; o alvo posterior 0,35 não pode causar interrupção antecipada. Diferenças no número de itens elegíveis de cada alternativa podem inviabilizar o banco e exigem reporte explícito.
+7. Os percentis de repetições descrevem variabilidade Monte Carlo, não incerteza populacional.
+
+# 12. Conclusão
+
+A comparação de Fisher e EPE deve respeitar os bancos específicos de cada área. Para Linguagens, a estrutura documentada requer 40 itens comuns e cinco itens de apenas uma alternativa linguística, preservando no mapa os 50 registros originais. As quotas implementadas verificam essa composição na simulação e impedem mistura de idiomas; a meta de DP posterior 0,35 é avaliada ao final da aplicação LC fixa. Resultados só devem ser divulgados após execução e validação da preparação com os arquivos-fonte, reconciliação das exclusões e confirmação da escala dos parâmetros.
